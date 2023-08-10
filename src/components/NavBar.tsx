@@ -1,50 +1,51 @@
-import './NavBar.css'
+import "./NavBar.css";
 import logo from "../assets/logo.png";
 
 const NavBar = () => {
   return (
-    
-<nav className="bg-primary">
-  <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-    <div className="relative flex h-16 items-center justify-between">
-    <img className="h-10 w-auto" src={logo} alt="Quiz Lit"/>
+    <nav className="bg-primary">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div className="mx-auto flex justify-between items-center p-4">
+          <img className="h-10 w-auto" src={logo} alt="Quiz Lit" />
 
-
-      <div className="flex flex-1 items-center justify-self-center">
-    
-      <svg aria-hidden="true" className="s-input-icon s-input-icon__search svg-icon iconSearch" width="18" height="18" viewBox="0 0 18 18"><path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z"></path></svg>
-      <input placeholder="Type here to study any set..." className="icon w-1/2 focus:outline-none rounded-full p-1 pl-[30px] placeholder-secondary text-secondary bg-accent shadow-[inset_0_2px_4.5px_rgba(0,0,0,0.6)] truncate ..."/>
-
-           
-      </div>
-      
-      <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <button type="button" className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2  active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
-    active:border-b-[0px] transition-all duration-150">
-          <h1>Login / Signup</h1>
-        </button>
-    {/*profile pic for future use
-        <div className="relative ml-3">
-          <div>
-            <button type="button" className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <span className="absolute -inset-1.5"></span>
-              <span className="sr-only">Open user menu</span>
-              <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""/>
-            </button>
+          <div className="relative w-1/2">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg
+                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="block w-full p-2 pl-10 text-sm placeholder-secondary bg-accent rounded-lg focus:ring-blue-500 focus:border-blue-500 "
+              placeholder="Search Mockups, Logos..."
+              required
+            />
           </div>
 
+          <button
+            type="button"
+            className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2  active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
+        active:border-b-[0px] transition-all duration-150"
+          >
+            Login / Signup
+          </button>
         </div>
-        */}
       </div>
-    </div>
-  </div>
+    </nav>
+  );
+};
 
-  <div className="sm:hidden" id="mobile-menu">
- { /* mobile here */ }
-    
-  </div>
-</nav>
-  )
-}
-
-export default NavBar
+export default NavBar;
