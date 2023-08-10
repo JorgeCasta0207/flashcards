@@ -1,11 +1,11 @@
 import './App.css'
-import NavBar from './components/NavBar'
+import NotFound from './routes/404'
 
 function App() {
 
   return (
     <>
-    <NavBar/>
+    <NotFound/>
     </>
   )
 }
