@@ -1,6 +1,11 @@
+import NavBar from "../components/NavBar"
+
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>
+      <NavBar />
+      Profile
+    </div>
   )
 }
 

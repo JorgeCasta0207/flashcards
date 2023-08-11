@@ -1,8 +1,10 @@
 import bg from '../assets/bg image.png'
+import NavBar from '../components/NavBar'
 
 const Home = () => {
   return (
     <div>
+      <NavBar />
       <div className="relative">
       <img src={bg} />
       <div className="absolute top-32 left-0 text-secondary font-bold text-[2.5rem] bg-zinc-950/50"><p>Quiz Lit - Master Your Studies</p></div>

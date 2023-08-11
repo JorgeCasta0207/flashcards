@@ -1,6 +1,11 @@
+import NavBar from "../components/NavBar"
+
 const SearchResults = () => {
   return (
-    <div>SearchResults</div>
+    <div>
+      <NavBar />
+      SearchResults
+    </div>
   )
 }
 

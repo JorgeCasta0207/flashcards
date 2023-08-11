@@ -1,6 +1,11 @@
+import NavBar from "../components/NavBar"
+
 const Study = () => {
   return (
-    <div>Study</div>
+    <div>
+      <NavBar />
+        Study
+    </div>
   )
 }
 

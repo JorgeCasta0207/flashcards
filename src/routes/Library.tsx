@@ -1,6 +1,11 @@
+import NavBar from '../components/NavBar'
+
 const Library = () => {
   return (
-    <div>Library</div>
+    <div>
+      <NavBar />
+      Library
+      </div>
   )
 }
 
