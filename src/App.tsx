@@ -1,11 +1,14 @@
 import './App.css'
-import NotFound from './routes/404'
+import NavBar from './components/NavBar'
+
+import Home from './routes/Home'
 
 function App() {
 
   return (
     <>
-    <NotFound/>
+    <NavBar/>
+    <Home />
     </>
   )
 }
