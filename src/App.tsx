@@ -16,6 +16,7 @@ function App() {
   return (
   <BrowserRouter>
   <Navbar />
+  <div className = 'bg-primary body-wrapper'>
   <Link to ="/">Home |</Link>
   <Link to ="/Login"> Login |</Link>
   <Link to ="/Signup"> Signup |</Link>
@@ -38,6 +39,7 @@ function App() {
       <Route path="/Edit" element={<Edit />}/>
       <Route path='*' element={<NotFound />}/>
     </Routes>
+    </div>
   </BrowserRouter>
   )
 }

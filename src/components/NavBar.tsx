@@ -10,7 +10,7 @@ const NavBar = () => {
     else
     return (
     <nav className="bg-primary">
-      <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
+      <div className="">
         <div className="mx-auto flex justify-between items-center p-1">
           {/*Logo vvv*/}
           <img className="h-20 w-auto" src={logo} alt="Quiz Lit" />
