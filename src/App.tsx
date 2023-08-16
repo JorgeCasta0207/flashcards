@@ -9,11 +9,13 @@ import SearchResults from './routes/SearchResults'
 import Create from './routes/Create'
 import Edit from './routes/Edit'
 import NotFound from './routes/404'
+import Navbar from './components/NavBar'
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 
 function App() {
   return (
   <BrowserRouter>
+  <Navbar />
   <Link to ="/">Home |</Link>
   <Link to ="/Login"> Login |</Link>
   <Link to ="/Signup"> Signup |</Link>

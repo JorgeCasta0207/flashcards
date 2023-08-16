@@ -1,13 +1,20 @@
 import "./NavBar.css";
 import logo from "../assets/logo.png";
 
-const NavBar = () => {
-  return (
-    <nav className="bg-primary">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="mx-auto flex justify-between items-center p-4">
-          <img className="h-10 w-auto" src={logo} alt="Quiz Lit" />
+import { useLocation } from "react-router-dom";
 
+const NavBar = () => {
+  const Location = useLocation();
+  if (Location.pathname === '/Login' || Location.pathname === '/Signup') { 
+    return (<img className="h-20 w-auto" src={logo} alt="Quiz Lit" />)}
+    else
+    return (
+    <nav className="bg-primary">
+      <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
+        <div className="mx-auto flex justify-between items-center p-1">
+          {/*Logo vvv*/}
+          <img className="h-20 w-auto" src={logo} alt="Quiz Lit" />
+          {/*Search bar vvv*/}
           <div className="relative w-1/2">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
@@ -34,7 +41,7 @@ const NavBar = () => {
               required
             />
           </div>
-
+          {/*Login button vvv*/} 
           <button
             type="button"
             className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2  active:[box-shadow:0_0px_0_0_#1b6ff8,0_0px_0_0_#1b70f841]
