@@ -1,11 +1,11 @@
-import bg from '../assets/bg image.png'
+import bg from '../assets/bg-image.png'
 import flashcards from '../assets/flashcards.jpg'
 
 const Home = () => {
   return (
     <div>
       <div className="relative">
-      <img src={bg} className='brightness-[.56]'/>
+      <img src={bg} className='brightness-[.56] w-full'/>
       <div className="absolute top-40 left-0 pl-40 bg-accent bg-opacity-[.57] rounded-r-xl pr-8 pb-2">
         <p id="title-text" className='text-secondary font-bold text-[1.5rem] lg:text-[3.5rem] [text-shadow:_0_3px_0_rgb(7_0_0_/_40%)] ml-20'>Quiz Lit - Master Your Studies</p>
         </div>

@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const NavBar = () => {
   const Location = useLocation();
   if (Location.pathname === '/Login' || Location.pathname === '/Signup') { 
-    return (<img className="h-20 w-auto" src={logo} alt="Quiz Lit" />)}
+    return (<></>)}
     else
     return (
     <nav className="bg-primary">

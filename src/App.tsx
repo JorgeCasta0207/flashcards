@@ -10,13 +10,14 @@ import Create from './routes/Create'
 import Edit from './routes/Edit'
 import NotFound from './routes/404'
 import Navbar from './components/NavBar'
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 
 function App() {
   return (
   <BrowserRouter>
-  <Navbar />
   <div className = 'bg-primary body-wrapper'>
+  <Navbar />
+
   <Link to ="/">Home |</Link>
   <Link to ="/Login"> Login |</Link>
   <Link to ="/Signup"> Signup |</Link>
@@ -25,7 +26,7 @@ function App() {
   <Link to ="/Study"> Study |</Link>
   <Link to ="/Results"> SearchResults |</Link>
   <Link to ="/Create"> Create |</Link>
-  <Link to ="/Edit"> Edit |</Link>
+  <Link to ="/Edit"> Edit |</Link> 
     <Routes>
 
       <Route path="/" element={<Home />} />
