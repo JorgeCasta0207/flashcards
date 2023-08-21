@@ -7,16 +7,17 @@ export default {
   ],
   theme: {
     fontFamily: {
-			'sans': ['"Plus Jakarta Sans"', 'sans-serif']
-		},
+      'sans': ['"Plus Jakarta Sans"', 'sans-serif']
+    },
     extend: {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
         'primary': '#4BBEFF',
-        'secondary':'#F1FAFE',
+        'secondary': '#F1FAFE',
         'accent': '#9C73F6',
-        'text': '#040B02'
+        'text': '#040B02',
+        'mobile': '#D9D9D9'
       },
     },
   },

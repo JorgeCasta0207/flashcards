@@ -1,34 +1,33 @@
 .background {
-    background-color:#4BBEFF ;
-    }
-    .studycard {
-    background-color: white;
-    border-radius: 7px;
-    margin: 6%;
-    width: 60%;
-    text-align: center;
-    padding:15%;
-    box-shadow: 2px 7px 43px -10px rgba(0,0,0,0.75);
-    margin-right: auto;
-    margin-left: auto;
-    }
-    
-    
-    .side-cards {
-    background-color: white;
-    width: 15%;
-    border-radius: 5px;
-    padding: 5%;
-    text-align: center;
-    box-shadow: 13px 12px 25px -4px rgba(0,0,0,0.54);
-    float:right;
-    margin-right: 3%;
-    flex-direction:column;
-    right: 0;
-    position: fixed;
-    top: 21%;
-    }
-    
+  background-color: #4bbeff;
+}
+.studycard {
+  background-color: white;
+  border-radius: 7px;
+  margin: 6%;
+  width: 60%;
+  text-align: center;
+  padding: 15%;
+  box-shadow: 2px 7px 43px -10px rgba(0, 0, 0, 0.75);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.side-cards {
+  background-color: white;
+  width: 15%;
+  border-radius: 5px;
+  padding: 5%;
+  text-align: center;
+  box-shadow: 13px 12px 25px -4px rgba(0, 0, 0, 0.54);
+  float: right;
+  margin-right: 3%;
+  flex-direction: column;
+  right: 0;
+  position: fixed;
+  top: 21%;
+}
+
 .body-wrapper {
-    height: 100vh;
+  height: 100vh;
 }
