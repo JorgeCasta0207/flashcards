@@ -8,7 +8,7 @@ type Flashcard = {
   answer: string;
 };
 
-const sampleOptions = ["hello", "test"]
+const sampleOptions = ["hello", "test"];
 
 function Flashcard(props: Flashcard) {
   const [showFront, setShowFront] = useState(true);
