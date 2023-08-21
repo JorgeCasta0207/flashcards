@@ -12,6 +12,8 @@ import NotFound from './routes/404'
 import Navbar from './components/NavBar'
 import { BrowserRouter, Routes, Route, Link} from "react-router-dom"
 
+import MobileNavBar from './components/MobileNavBar'
+
 function App() {
   return (
   <BrowserRouter>
@@ -40,7 +42,9 @@ function App() {
       <Route path="/Edit" element={<Edit />}/>
       <Route path='*' element={<NotFound />}/>
     </Routes>
+
     </div>
+  <MobileNavBar />
   </BrowserRouter>
   )
 }
