@@ -23,7 +23,7 @@ const Home = () => {
           {/* purple bar here */}
         </div>
         <div className='w-[80%]'>
-          <p className='text-[1.5rem]'>Quiz Lit is a powerful online tool that allows students tocreate, generate, and study flashcards. With Quiz Lit, you can easily create flashcards for any subject, generate flashcards from existing sets, and study them toimprove your knowledge. Share your flashcards with others and collaborate on learning together.
+          <p className='text-[1.5rem]'>Quiz Lit is a powerful online tool that allows students tocreate, generate, and study flashcards. With Quiz Lit, you can easily create flashcards for any subject, generate flashcards from existing sets, and study them to improve your knowledge. Share your flashcards with others and collaborate on learning together.
           <span className='font-bold inline-block mt-7'>Start mastering your subjects with Quiz Lit today!</span></p>
         </div>
       </div>

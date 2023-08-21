@@ -26,9 +26,9 @@ function Signup() {
     {/*login form*/}
     <div className='flex justify-center'>
       <div
-        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-accent w-[275px] h-[185px] rounded-2xl m-[150px]'
+        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-accent w-[275px] h-[185px] rounded-2xl m-[160px]'
       >
-        <p className='mt-[160px] ml-[10px]'>Already Registered?{' '}
+        <p className='mt-[155px] ml-[10px]'>Already Registered?{' '}
         <Link
           to='/Login'
           className='text-slate-200 underline underline-offset-2'
@@ -39,7 +39,7 @@ function Signup() {
       </div>
     </div>
     {/* signup card */}
-    <div className='z-10 p-[20px] text-center relative m-auto w-[275px] bg-cover drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl top-[61px] left-[30px]'
+    <div className='z-10 pb-[10px] px-[20px] pt-[20px] text-center relative m-auto w-[275px] bg-cover drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl top-[61px] left-[30px]'
     style={{ backgroundImage: `url(${flashcardbg}) ` }}
     >
       {/*form stuff*/}
@@ -139,7 +139,7 @@ function Signup() {
         <div className='text-center'>
           <button
             type='button'
-            className=' text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none'
+            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none'
           >
             Register
           </button>
