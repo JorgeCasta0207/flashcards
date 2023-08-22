@@ -14,7 +14,7 @@ function App() {
   ) {
     return (
       <>
-        <div className="bg-mobile md:bg-primary body-wrapper">
+        <div className="max-lg:bg-mobile bg-primary body-wrapper">
           <NavBar />
           <Outlet />
         </div>

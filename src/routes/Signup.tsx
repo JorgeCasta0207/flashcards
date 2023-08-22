@@ -43,6 +43,7 @@ function Signup() {
     style={{ backgroundImage: `url(${flashcardbg}) ` }}
     >
       {/*form stuff*/}
+    <form className='group'>
       <div className='flex'>
           <span className='inline-flex items-center px-3 text-blue-600 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
             <svg
@@ -60,6 +61,7 @@ function Signup() {
             type='text'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='username'
+            required
           ></input>
         </div>
         <div className='flex'>
@@ -76,10 +78,12 @@ function Signup() {
           </span>
           {/*email v*/}
           <input
-            type='text'
+            type='email'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='email'
-          ></input>
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
         </div>
         <div className='flex pt-[10px]'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -106,7 +110,8 @@ function Signup() {
             type='password'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='password'
-          ></input>
+            required
+          />
         </div>
          {/*password 2 v*/}
          <div className='flex'>
@@ -133,17 +138,19 @@ function Signup() {
             type='password'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-blue-600 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='confirm password'
-          ></input>
+            required
+          />
         </div>
 
         <div className='text-center'>
           <button
-            type='button'
-            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none'
+            type='submit'
+            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-50'
           >
             Register
           </button>
         </div>
+    </form>
     </div>
 
   </div>

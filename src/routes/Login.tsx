@@ -24,6 +24,7 @@ const Login = () => {
         </p>
       </div>
       {/*login form*/}
+    <form className='group'>
       <div className='flex justify-center'>
         <div
           className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'
@@ -36,17 +37,19 @@ const Login = () => {
                 aria-hidden='true'
                 xmlns='http://www.w3.org/2000/svg'
                 fill='currentColor'
-                viewBox='0 0 20 20'
+                viewBox='0 0 24 24'
               >
-                <path d='M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z' />
+                <path d="M12 .02c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.99 6.98l-6.99 5.666-6.991-5.666h13.981zm.01 10h-14v-8.505l7 5.673 7-5.672v8.504z" />
               </svg>
             </span>
-            {/*username v*/}
+            {/*email v*/}
             <input
-              type='text'
-              className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
-              placeholder='username'
-            ></input>
+              type='email'
+              className='peer shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
+              placeholder='email'
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            />
           </div>
           <div className='flex pt-[10px]'>
             <span className='inline-flex items-center px-[10px] text-[#584289] bg-[#584289] border border-r-0 border-gray-300 rounded-l-md'>
@@ -73,13 +76,14 @@ const Login = () => {
               type='password'
               className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='password'
-            ></input>
+              required
+            />
           </div>
           <p className='text-[11px]'>Forgot password?</p>
           <div className='text-center'>
             <button
-              type='button'
-              className=' text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[20px] focus:outline-none'
+              type='submit'
+              className=' text-white bg-primary hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[20px] focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-50'
             >
               Login
             </button>
@@ -98,7 +102,7 @@ const Login = () => {
           </Link>
         </p>
       </div>
-
+    </form>
     </div>
   )
 }
