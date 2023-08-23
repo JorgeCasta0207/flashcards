@@ -18,7 +18,7 @@ export default {
         'accent': '#9C73F6',
         'text': '#040B02',
         'mobile': '#D9D9D9'
-      },
+      }
     },
   },
   plugins: [],
