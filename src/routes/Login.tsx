@@ -30,7 +30,7 @@ const Login = () => {
           className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'
           style={{ backgroundImage: `url(${flashcardbg}) ` }}
         >
-          <div className='flex'>
+          <div className='flex flex-wrap'>
             <span className='inline-flex items-center px-3 text-[#584289] bg-[#584289] border border-r-0 border-gray-300 rounded-l-md'>
               <svg
                 className='w-4 h-4 text-secondary'
@@ -48,8 +48,9 @@ const Login = () => {
               className='peer shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='email'
               required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
             />
+            <div className='w-full top-[5px] absolute hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>Please enter a valid email address</div>
           </div>
           <div className='flex pt-[10px]'>
             <span className='inline-flex items-center px-[10px] text-[#584289] bg-[#584289] border border-r-0 border-gray-300 rounded-l-md'>

@@ -1,10 +1,64 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
 import flashcardbg from '../assets/flashcard-bg.jpg'
 import loginbg from '../assets/login-bg.png'
 import logo from '../assets/logo.png'
 
 function Signup() {
+  const [input, setInput] = useState({
+    password: '',
+    confirmPassword: ''
+  });
+ 
+  const [error, setError] = useState({
+    password: '',
+    confirmPassword: ''
+  })
+ 
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInput(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    console.log(input);
+    validateInput(e);
+  }
+ 
+  const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let { name, value } = e.target;
+    setError(prev => {
+      const stateObj = { ...prev, [name]: "" };
+ 
+      switch (name) {
+ 
+        case "password":
+          if (!value) {
+            stateObj[name] = "Please enter Password.";
+          } else if (input.confirmPassword && value !== input.confirmPassword) {
+            stateObj["confirmPassword"] = "Password and Confirm Password does not match.";
+          } else {
+            stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
+          }
+          break;
+ 
+        case "confirmPassword":
+          if (!value) {
+            stateObj[name] = "Please enter Confirm Password.";
+          } else if (input.password && value !== input.password) {
+            stateObj[name] = "Password and Confirm Password does not match.";
+          }
+          break;
+ 
+        default:
+          break;
+      }
+ 
+      return stateObj;
+    });
+  }
+
   return (
     <div
     className='bg-cover'
@@ -79,11 +133,12 @@ function Signup() {
           {/*email v*/}
           <input
             type='email'
-            className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
+            className='peer shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='email'
             required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
           />
+          <div className='top-[5px] absolute hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>Please enter a valid email address</div>
         </div>
         <div className='flex pt-[10px]'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -110,8 +165,12 @@ function Signup() {
             type='password'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='password'
+            value={input.password}
+          onChange={onInputChange}
+          onBlur={validateInput}
+          name = "password"
             required
-          />
+          />{error.password && <span className='err'>{error.password}</span>}
         </div>
          {/*password 2 v*/}
          <div className='flex'>
@@ -139,7 +198,12 @@ function Signup() {
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-blue-600 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='confirm password'
             required
+            value={input.confirmPassword}
+            name = 'confirmPassword'
+          onChange={onInputChange}
+          onBlur={validateInput}
           />
+          {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
         </div>
 
         <div className='text-center'>
