@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { PaginatedResult } from "../models/pagination";
 import { User, UserFormValues } from "../models/user";
-import { Sets } from "../models/set";
 import { Flashcard } from "../models/flashcard";
+import { FlashcardSet } from "../models/flashcardSet";
 
 axios.defaults.baseURL = "https://bvtflashcardsserver.fly.dev/api/";
 
@@ -67,9 +67,11 @@ const Account = {
 
 const Set = {
   list: (params: URLSearchParams) =>
-    axios.get<PaginatedResult<Sets[]>>("sets", { params }).then(responseBody),
-  create: (set: Sets) => requests.post<void>("sets", set),
-  update: (set: Sets) => requests.put<void>(`sets/${set.id}`, set),
+    axios
+      .get<PaginatedResult<FlashcardSet[]>>("sets", { params })
+      .then(responseBody),
+  create: (set: FlashcardSet) => requests.post<void>("sets", set),
+  update: (set: FlashcardSet) => requests.put<void>(`sets/${set.id}`, set),
   delete: (id: string) => requests.delete<void>(`sets/${id}`),
 };
 

@@ -1,6 +1,6 @@
 import { Flashcard } from "./flashcard";
 
-export interface Sets {
+export interface FlashcardSet {
   id: string;
   title: string;
   description: string;
