@@ -2,12 +2,11 @@
  .popup {
     position: relative;
     display: inline-block;
-    cursor: pointer;
   }
   
   /* The actual popup (appears on top) */
   .popup .popuptext {
-    visibility: hidden;
+    visibility: visible;
     width: 160px;
     background-color: #555;
     color: #fff;
@@ -16,9 +15,10 @@
     padding: 8px 0;
     position: absolute;
     z-index: 1;
-    bottom: 125%;
     left: 50%;
-    margin-left: -80px;
+    margin-left: 10px;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
   }
   
   /* Popup arrow */
@@ -27,7 +27,7 @@
     position: absolute;
     top: 100%;
     left: 50%;
-    margin-left: -5px;
+    margin-left: 10%;
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;

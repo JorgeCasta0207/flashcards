@@ -9,7 +9,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required().max(30).matches(
+  username: Yup.string().required('Username is required').max(30).matches(
     /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
     'Username must only contain letters, numbers, periods and underscores'
   ),
@@ -187,7 +187,8 @@ function Signup() {
         <div className='text-center'>
           <button
             type='submit'
-            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-50'
+            disabled={Object.keys(errors).length > 0}
+            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none disabled:pointer-events-none disabled:opacity-50'
           >
             Register
           </button>

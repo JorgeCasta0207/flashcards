@@ -54,13 +54,10 @@ const NavBar = () => {
             </div>
 
             {/*Login button vvv*/}
-            <button
-              type="button"
-              className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2
-        active:border-b-[0px] transition-all duration-150"
-            >
+            <Link className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2
+             active:border-b-[0px] transition-all duration-150" to="/Login">
               Login / Signup
-            </button>
+            </Link>
           </div>
         </div>
       </nav>
