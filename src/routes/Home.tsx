@@ -14,7 +14,7 @@ const Home = () => {
             </p>
           </div>
           <div className="hidden lg:block">
-            <p className="text-center xl:text-right text-4xl xl:text-6xl text-white pb-5 pt-2">
+            <p className="text-center xl:text-right text-4xl xl:text-6xl text-white pb-5 pt-2 [text-shadow:_0_3px_0_rgb(7_0_0_/_40%)]">
               Quiz Lit - Master Your Studies
             </p>
           </div>
@@ -25,19 +25,31 @@ const Home = () => {
         <br />
       </div>
 
-      <div className="table w-full bg-primary mt-8">
-        <div className="table-row">
+      <table className="grid w-full bg-primary mt-8 m-auto">
+        <div className="max-lg:block inline-flex">
           <img
             src={flashcards}
-            className="w-2/5 xl:w-1/6 rounded-full mx-auto drop-shadow-lg"
+            className="w-[22%] xl:w-1/6 rounded-full m-auto drop-shadow-lg"
           />
           {/* circle thing here */}
-        </div>
-        <div className="table-row">
+      <div className="table-cell max-lg:hidden "><div className="mx-[15px] bg-accent rounded-full w-[18px] h-[85%]"></div></div>
+      <div className="table-cell max-lg:hidden inline-block"><p className="text-3xl text-left max-w-2xl m-auto">
+            Quiz Lit is a powerful online tool that allows students to create,
+            generate, and study flashcards. With Quiz Lit, you can easily create
+            flashcards for any subject, generate flashcards from existing sets,
+            and study them to improve your knowledge. Share your flashcards with
+            others and collaborate on learning together.
+          </p>
+          <p className="text-[14.5px] text-3xl font-bold whitespace-nowrap text-left mt-7">
+            Start mastering your subjects with Quiz Lit today!
+          </p>
+          </div>
+      </div>
+        <div className="table-row hidden max-lg:block">
           {/* purple bar here */}
           <div className="my-[15px] bg-accent rounded-full h-[18px] w-[160px] m-auto"></div>
         </div>
-        <div className="table-row">
+        <div className="table-row hidden max-lg:block">
           <p className="text-[15px] text-center px-[10px] max-w-2xl mx-auto">
             Quiz Lit is a powerful online tool that allows students to create,
             generate, and study flashcards. With Quiz Lit, you can easily create
@@ -49,7 +61,7 @@ const Home = () => {
             Start mastering your subjects with Quiz Lit today!
           </p>
         </div>
-      </div>
+      </table>
     </>
     // </div>
   );

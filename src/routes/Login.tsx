@@ -4,6 +4,17 @@ import flashcardbg from '../assets/flashcard-bg.jpg'
 import loginbg from '../assets/login-bg.png'
 import logo from '../assets/logo.png'
 
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string().matches(
+    /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/,
+    'Please enter a valid email'
+  ).required('Email is required'),
+  password: Yup.string().required('Password is required')
+});
+
 const Login = () => {
   return (
     <div
@@ -24,7 +35,15 @@ const Login = () => {
         </p>
       </div>
       {/*login form*/}
-    <form className='group'>
+      <Formik 
+      initialValues={{
+        email: '',
+        password: '',
+      }}
+      validationSchema={validationSchema}
+      onSubmit={(values: any) => { console.log(values);}}>
+    {({ errors, touched }) => (
+    <Form /*className='group'*/>
       <div className='flex justify-center'>
         <div
           className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'
@@ -43,14 +62,13 @@ const Login = () => {
               </svg>
             </span>
             {/*email v*/}
-            <input
+            <Field
+              name='email'
               type='email'
-              className='peer shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
+              className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='email'
               required
-              pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
-            />
-            <div className='w-full top-[5px] absolute hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>Please enter a valid email address</div>
+            />{errors.email && touched.email ? <div className='w-full top-[5px] absolute text-sm text-red-500'>{errors.email}</div> : null}
           </div>
           <div className='flex pt-[10px]'>
             <span className='inline-flex items-center px-[10px] text-[#584289] bg-[#584289] border border-r-0 border-gray-300 rounded-l-md'>
@@ -73,12 +91,13 @@ const Login = () => {
               </svg>
             </span>
             {/*password v*/}
-            <input
+            <Field
+              name= 'password'
               type='password'
               className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='password'
               required
-            />
+            /> {errors.password && touched.password ? <div>{errors.password}</div> : null}
           </div>
           <p className='text-[11px]'>Forgot password?</p>
           <div className='text-center'>
@@ -103,7 +122,8 @@ const Login = () => {
           </Link>
         </p>
       </div>
-    </form>
+    </Form>)}
+    </Formik>
     </div>
   )
 }
