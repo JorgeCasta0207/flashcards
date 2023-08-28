@@ -1,23 +1,81 @@
-import "./NavBar.css";
+import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-
-import { Link, useLocation } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import { router } from "../routes/Routes";
+import Avatar from "@mui/material/Avatar";
+import { Menu, MenuItem } from "@mui/material";
+import React from "react";
+import agent from "../api/agent";
+import { User } from "../models/user";
 
 const NavBar = () => {
-  const Location = useLocation();
-  if (Location.pathname === "/Login" || Location.pathname === "/Signup") {
-    return <></>;
-  } else
-    return (
-      <nav className="bg-primary">
-        <div className="">
-          <div className="mx-auto flex justify-between items-center p-1">
-            {/*Logo vvv*/}
-            <img className="h-20 w-auto" src={logo} alt="Quiz Lit" />
-            {/*Search bar vvv*/}
+  const [search, setSearch] = useState("");
+  const [user, setUser] = useState<User | null>(null);
+  const token = localStorage.getItem("token");
 
-            <div className="relative w-1/2">
-              <Link to="/">Home |</Link>
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await agent.Account.current();
+      setUser(data);
+    };
+
+    if (token) {
+      fetchData();
+    } else {
+      setUser(null);
+    }
+  }, [token]);
+
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && search) {
+      router.navigate(`/Results/${search}`);
+    }
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (option: string) => {
+    switch (option) {
+      case "sets":
+        router.navigate("/Library");
+        break;
+      case "create":
+        router.navigate("/Create");
+        break;
+      case "profile":
+        router.navigate("/Profile");
+        break;
+      case "logout":
+        localStorage.removeItem("token");
+        setUser(null);
+        router.navigate("/");
+        break;
+      default:
+        break;
+    }
+
+    setAnchorEl(null);
+  };
+
+  return (
+    <nav className="bg-primary px-5">
+      <div className="">
+        <div className="mx-auto flex justify-between items-center p-1">
+          {/*Logo vvv*/}
+          <img
+            className="h-20 w-auto cursor-pointer"
+            src={logo}
+            alt="Quiz Lit"
+            onClick={() => router.navigate("/")}
+          />
+          {/*Search bar vvv*/}
+
+          {/* <Link to="/">Home |</Link>
               <Link to="/Login"> Login |</Link>
               <Link to="/Signup"> Signup |</Link>
               <Link to="/Profile"> Profile |</Link>
@@ -25,46 +83,66 @@ const NavBar = () => {
               <Link to="/Study"> Study |</Link>
               <Link to="/Results"> SearchResults |</Link>
               <Link to="/Create"> Create |</Link>
-              <Link to="/Edit"> Edit |</Link>
+              <Link to="/Edit"> Edit |</Link> */}
 
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-violet-900 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                className="block w-full p-2 pl-10 text-sm placeholder-secondary bg-accent rounded-lg focus:ring-blue-500 focus:border-blue-500 text-secondary shadow-[inset_0_0px_4px_rgba(0,0,0,0.6)]"
-                placeholder="Search Mockups, Logos..."
-                required
-              />
+          <div className="relative w-1/3">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <SearchIcon />
             </div>
+            <input
+              className="w-full p-2 pl-10 text-sm text-white placeholder:text-white bg-accent rounded-lg"
+              placeholder="Search all sets..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyUp={handleSearch}
+            />
+          </div>
 
-            {/*Login button vvv*/}
+          {user ? (
+            <div>
+              <Avatar
+                sx={{ bgcolor: "#ff5722", width: 45, height: 45 }}
+                className="cursor-pointer"
+                onClick={handleClick}
+              >
+                {user.username[0].toUpperCase()}
+              </Avatar>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={() => handleClose("")}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={() => handleClose("sets")}>
+                  Your Sets
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("create")}>
+                  Create Set
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("profile")}>
+                  Your Profile
+                </MenuItem>
+                <MenuItem onClick={() => handleClose("logout")}>
+                  Log out
+                </MenuItem>
+              </Menu>
+            </div>
+          ) : (
             <button
               type="button"
-              className="relative rounded-full bg-secondary p-2 text-black font-bold focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 active:translate-y-2
-        active:border-b-[0px] transition-all duration-150"
+              className="bg-secondary py-2 px-4 rounded-full text-lg"
+              onClick={() => router.navigate("/Login")}
             >
               Login / Signup
             </button>
-          </div>
+          )}
         </div>
-      </nav>
-    );
+      </div>
+    </nav>
+  );
 };
 
 export default NavBar;

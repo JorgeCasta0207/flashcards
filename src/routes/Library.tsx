@@ -7,6 +7,7 @@ import { Pagination as Paginate } from "../models/pagination";
 import SearchIcon from "@mui/icons-material/Search";
 import { Menu, MenuItem } from "@mui/material";
 import React from "react";
+import { router } from "./Routes";
 
 const Library = () => {
   const [sets, setSets] = useState<FlashcardSet[]>([]);
@@ -15,6 +16,7 @@ const Library = () => {
   const [search, setSearch] = useState("");
   const [searchChanged, setSearchChanged] = useState(false);
   const [sort, setSort] = useState("");
+  const [pageReload, setPageReload] = useState(false);
   const debounceDelay = 300;
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const Library = () => {
     const fetchData = async () => {
       const params = new URLSearchParams();
       params.append("pageNumber", page.toString());
+      params.append("byUser", "true");
       if (search) {
         params.append("search", search);
       }
@@ -43,12 +46,14 @@ const Library = () => {
       fetchData();
     }
 
+    setPageReload(false);
+
     return () => {
       if (timeout) {
         clearTimeout(timeout);
       }
     };
-  }, [page, search, sort, searchChanged]);
+  }, [page, search, sort, searchChanged, pageReload]);
 
   const handlePageChange = (
     _event: React.ChangeEvent<unknown>,
@@ -73,6 +78,12 @@ const Library = () => {
   const handleClose = (sort: string) => {
     setSort(sort);
     setAnchorEl(null);
+  };
+
+  const handleDelete = async (id: string) => {
+    await agent.Set.delete(id);
+    setPageReload(true);
+    router.navigate("/Library");
   };
 
   return (
@@ -112,7 +123,13 @@ const Library = () => {
 
       <div className="flex flex-col items-center justify-between">
         {sets
-          ? sets.map((set: FlashcardSet) => <SetItem key={set.id} {...set} />)
+          ? sets.map((set: FlashcardSet) => (
+              <SetItem
+                key={set.id}
+                flashCardSet={set}
+                handleDelete={handleDelete}
+              />
+            ))
           : null}
       </div>
       <div className="bg-secondary rounded-md mt-9 w-fit mx-auto p-2">
