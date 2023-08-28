@@ -1,10 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { PaginatedResult } from "../models/pagination";
-import { User, UserFormValues } from "../models/user";
-import { Flashcard } from "../models/flashcard";
+import { ChangeUserFormValues, User, UserFormValues } from "../models/user";
 import { FlashcardSet } from "../models/flashcardSet";
 
-axios.defaults.baseURL = "https://bvtflashcardsserver.fly.dev/api/";
+axios.defaults.baseURL = "http://localhost:5000/api/";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -63,6 +62,11 @@ const Account = {
   login: (user: UserFormValues) => requests.post<User>("account/login", user),
   register: (user: UserFormValues) =>
     requests.post<User>("account/register", user),
+  username: (user: ChangeUserFormValues) =>
+    requests.put<void>("account/username", user),
+  password: (user: ChangeUserFormValues) =>
+    requests.put<void>("account/password", user),
+  delete: (user: User) => requests.post<void>("account/delete", user),
 };
 
 const Set = {
@@ -70,21 +74,15 @@ const Set = {
     axios
       .get<PaginatedResult<FlashcardSet[]>>("sets", { params })
       .then(responseBody),
+  detail: (id: string) => requests.get<FlashcardSet>(`sets/${id}`),
   create: (set: FlashcardSet) => requests.post<void>("sets", set),
   update: (set: FlashcardSet) => requests.put<void>(`sets/${set.id}`, set),
   delete: (id: string) => requests.delete<void>(`sets/${id}`),
 };
 
-const Flashcards = {
-  list: (id: string) => requests.get<Flashcard[]>(`flashcards/${id}`),
-  update: (flashcards: Flashcard[], id: string) =>
-    requests.put<void>(`flashcards/${id}`, flashcards),
-};
-
 const agent = {
   Account,
   Set,
-  Flashcards,
 };
 
 export default agent;
