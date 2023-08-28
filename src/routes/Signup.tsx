@@ -1,69 +1,43 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react';
 
 import flashcardbg from '../assets/flashcard-bg.jpg'
 import loginbg from '../assets/login-bg.png'
 import logo from '../assets/logo.png'
+import './SignUp.css';
+
+import { Formik, Form, Field } from 'formik';
+import * as Yup from 'yup';
+import agent from "../api/agent";
+import { UserFormValues } from '../models/user';
+import { router } from './Routes';
+
+const validationSchema = Yup.object().shape({
+  username: Yup.string().required('Username is required').max(30).matches(
+    /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+    'Username must only contain letters, numbers, periods and underscores'
+  ),
+  email: Yup.string().matches(
+    /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/,
+    'Please enter a valid email'
+  ).required('Email is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters long').max(10,'Max 10 characters')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .required('Confirm password is required'),
+});
 
 function Signup() {
-  const [input, setInput] = useState({
-    password: '',
-    confirmPassword: ''
-  });
- 
-  const [error, setError] = useState({
-    password: '',
-    confirmPassword: ''
-  })
- 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInput(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    console.log(input);
-    validateInput(e);
-  }
- 
-  const validateInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = e.target;
-    setError(prev => {
-      const stateObj = { ...prev, [name]: "" };
- 
-      switch (name) {
- 
-        case "password":
-          if (!value) {
-            stateObj[name] = "Please enter Password.";
-          } else if (input.confirmPassword && value !== input.confirmPassword) {
-            stateObj["confirmPassword"] = "Password and Confirm Password does not match.";
-          } else {
-            stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
-          }
-          break;
- 
-        case "confirmPassword":
-          if (!value) {
-            stateObj[name] = "Please enter Confirm Password.";
-          } else if (input.password && value !== input.password) {
-            stateObj[name] = "Password and Confirm Password does not match.";
-          }
-          break;
- 
-        default:
-          break;
-      }
- 
-      return stateObj;
-    });
-  }
 
   return (
     <div
     className='bg-cover'
-    style={{ backgroundImage: `url(${loginbg})`, height: '100vh' }}
-  >
+    style={{ backgroundImage: `url(${loginbg})`, height: '100vh' }}>
     <div className='p-3 w-max'>
       <Link to='/'>
         <img src={logo} className='h-14 w-auto rounded-xl' />
@@ -97,7 +71,26 @@ function Signup() {
     style={{ backgroundImage: `url(${flashcardbg}) ` }}
     >
       {/*form stuff*/}
-    <form className='group'>
+      <Formik 
+      initialValues={{
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      }}
+      validationSchema={validationSchema}
+      onSubmit={async(values: UserFormValues) => { 
+        const user = await agent.Account.register({
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        });
+        console.log(values);
+        localStorage.setItem("token", user.token);
+        router.navigate('/Library');
+      }}>
+    {({ errors, touched }) => (
+    <Form /*form className='group'*/>
       <div className='flex'>
           <span className='inline-flex items-center px-3 text-blue-600 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
             <svg
@@ -111,12 +104,14 @@ function Signup() {
             </svg>
           </span>
           {/*username v*/}
-          <input
+          <Field name="username"
             type='text'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='username'
             required
-          ></input>
+          />{errors.username && touched.username ? (
+            <div>{errors.username}</div>
+          ) : null}
         </div>
         <div className='flex'>
           <span className='inline-flex items-center px-3 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -131,14 +126,14 @@ function Signup() {
             </svg>
           </span>
           {/*email v*/}
-          <input
+          <Field
+            name="email"
             type='email'
-            className='peer shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
+            className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='email'
-            required
             pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
-          />
-          <div className='top-[5px] absolute hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>Please enter a valid email address</div>
+            required
+          />{errors.email && touched.email ? <div>{errors.email}</div> : null}
         </div>
         <div className='flex pt-[10px]'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -161,16 +156,14 @@ function Signup() {
             </svg>
           </span>
           {/*password v*/}
-          <input
+          <Field
+            name='password'
             type='password'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='password'
-            value={input.password}
-          onChange={onInputChange}
-          onBlur={validateInput}
-          name = "password"
             required
-          />{error.password && <span className='err'>{error.password}</span>}
+          />
+          {errors.password && touched.password ? <div>{errors.password}</div> : null}
         </div>
          {/*password 2 v*/}
          <div className='flex'>
@@ -193,30 +186,28 @@ function Signup() {
               />
             </svg>
           </span>
-          <input
+          <Field
+            name='confirmPassword'
             type='password'
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-blue-600 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='confirm password'
             required
-            value={input.confirmPassword}
-            name = 'confirmPassword'
-          onChange={onInputChange}
-          onBlur={validateInput}
           />
-          {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
+          {errors.confirmPassword && touched.confirmPassword ? <div>{errors.confirmPassword}</div> : null}
         </div>
 
         <div className='text-center'>
           <button
             type='submit'
-            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none group-invalid:pointer-events-none group-invalid:opacity-50'
+            disabled={Object.keys(errors).length > 0}
+            className='mt-[10px] text-white text-[20px] bg-accent hover:bg-violet-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-[40px] mb-1 text-[15px] focus:outline-none disabled:pointer-events-none disabled:opacity-50'
           >
             Register
           </button>
         </div>
-    </form>
+    </Form>)}
+    </Formik>
     </div>
-
   </div>
   )
 }
