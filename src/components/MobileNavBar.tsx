@@ -40,7 +40,7 @@ const MobileNavBar = () => {
               <img
                 src={plus}
                 alt="note"
-                className="p-[5px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] w-[100px] h-auto -mt-[86%] active:translate-y-2 transition-all duration-150"
+                className="p-[5px] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] w-[100px] h-auto active:translate-y-2 transition-all duration-150"
               />
             </Link>
           </div>
