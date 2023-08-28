@@ -25,46 +25,39 @@ const Home = () => {
         <br />
       </div>
 
-      <table className="grid w-full bg-primary mt-8 m-auto">
-        <div className="max-lg:block inline-flex">
-          <img
-            src={flashcards}
-            className="w-[22%] xl:w-1/6 rounded-full m-auto drop-shadow-lg"
-          />
-          {/* circle thing here */}
-      <div className="table-cell max-lg:hidden "><div className="mx-[15px] bg-accent rounded-full w-[18px] h-[85%]"></div></div>
-      <div className="table-cell max-lg:hidden inline-block"><p className="text-3xl text-left max-w-2xl m-auto">
-            Quiz Lit is a powerful online tool that allows students to create,
+ <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="flex flex-col items-center justify-between w-full mb-10 lg:flex-row">
+        
+      <img alt="flashcards" src={flashcards} className="border-8 border-accent w-[200px] h-[200px] lg:w-[450px] lg:h-[450px] rounded-full drop-shadow-[_0_3px_0_rgb(7_0_0_/_40%)]"/>
+      <div className="w-80 lg:h-[450px] lg:w-6 max-w-xl mb-6 mt-6 lg:mt-0 lg:mx-6 bg-accent h-[50%] rounded-full">&nbsp; </div>
+
+
+        <div className="mb-16 lg:mb-0 lg:max-w-lg lg:pr-5">
+          
+          <div className="max-w-xl mb-6">
+            
+            <h2 className="font-sans text-3xl sm:mt-0 mt-6 font-bold tracking-tight text-black sm:text-4xl sm:leading-none max-w-lg mb-6">
+             Quizlet - A powerful tool
+            </h2>
+            <p className="text-black text-2xl md:text-3xl">Quiz Lit is a powerful online tool that allows students to create,
             generate, and study flashcards. With Quiz Lit, you can easily create
             flashcards for any subject, generate flashcards from existing sets,
             and study them to improve your knowledge. Share your flashcards with
             others and collaborate on learning together.
-          </p>
-          <p className="text-[14.5px] text-3xl font-bold whitespace-nowrap text-left mt-7">
-            Start mastering your subjects with Quiz Lit today!
-          </p>
+
+            </p>
           </div>
+          <div className="flex items-center space-x-3">
+          <a href="/comingsoon"/>
+            <a className="text-center flex object-cover sm:mr-64 mr-32 object-top items-center text-white border border-2 justify-center w-full sm:px-10 py-4 leading-6 bg-black rounded-lg font-black">
+               Master your subjects with Quiz Lit today!
+    </a>
+    
+          </div>
+        </div>
       </div>
-        <div className="table-row hidden max-lg:block">
-          {/* purple bar here */}
-          <div className="my-[15px] bg-accent rounded-full h-[18px] w-[160px] m-auto"></div>
-        </div>
-        <div className="table-row hidden max-lg:block">
-          <p className="text-[15px] text-center px-[10px] max-w-2xl mx-auto">
-            Quiz Lit is a powerful online tool that allows students to create,
-            generate, and study flashcards. With Quiz Lit, you can easily create
-            flashcards for any subject, generate flashcards from existing sets,
-            and study them to improve your knowledge. Share your flashcards with
-            others and collaborate on learning together.
-          </p>
-          <p className="text-[14.5px] font-bold whitespace-nowrap text-center mt-7">
-            Start mastering your subjects with Quiz Lit today!
-          </p>
-        </div>
-      </table>
- <></>
+    </div>
     </>
-    // </div>
   );
 };
 
