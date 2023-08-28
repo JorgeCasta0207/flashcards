@@ -7,6 +7,9 @@ import './SignUp.css';
 
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+import agent from "../api/agent";
+import { UserFormValues } from '../models/user';
+import { router } from './Routes';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Username is required').max(30).matches(
@@ -19,7 +22,7 @@ const validationSchema = Yup.object().shape({
   ).required('Email is required'),
   password: Yup.string()
     .required('Password is required')
-    .min(8, 'Password must be at least 8 characters long')
+    .min(6, 'Password must be at least 6 characters long').max(10,'Max 10 characters')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
@@ -76,7 +79,16 @@ function Signup() {
         confirmPassword: ''
       }}
       validationSchema={validationSchema}
-      onSubmit={(values: any) => { console.log(values);}}>
+      onSubmit={async(values: UserFormValues) => { 
+        const user = await agent.Account.register({
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        });
+        console.log(values);
+        localStorage.setItem("token", user.token);
+        router.navigate('/Library');
+      }}>
     {({ errors, touched }) => (
     <Form /*form className='group'*/>
       <div className='flex'>

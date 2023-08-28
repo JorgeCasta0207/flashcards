@@ -7,6 +7,9 @@ import logo from '../assets/logo.png'
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import './SignUp.css'
+import agent from "../api/agent";
+import { UserFormValues } from '../models/user';
+import { router } from './Routes';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().matches(
@@ -42,7 +45,15 @@ const Login = () => {
         password: '',
       }}
       validationSchema={validationSchema}
-      onSubmit={(values: any) => { console.log(values);}}>
+      onSubmit={async(values: UserFormValues) => { 
+        console.log(values);
+        const user = await agent.Account.login({
+          email: values.email,
+          password: values.password,
+        });
+        localStorage.setItem("token", user.token);
+        router.navigate('/Library');
+        }}>
     {({ errors, touched }) => (
     <Form /*className='group'*/>
       <div className='flex justify-center'>
