@@ -18,8 +18,8 @@ function App() {
         <div className="max-lg:bg-mobile bg-primary body-wrapper">
           <NavBar />
           <Outlet />
-          <MobileNavBar />
         </div>
+        <MobileNavBar />
       </>
     );
   } else {

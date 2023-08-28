@@ -61,7 +61,7 @@ const Profile = () => {
 
   if (user) {
     return (
-      <div className="max-w-[1100px] mx-auto mt-6 p-2">
+      <div className="max-w-[1100px] mx-auto mt-6 p-2 mb-32">
         <div className="w-fit mx-auto">
           <img
             className="w-32 h-32 rounded-full mx-auto mb-4"
