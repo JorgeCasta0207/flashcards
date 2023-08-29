@@ -5,6 +5,7 @@ import agent from "../api/agent";
 import * as Yup from "yup";
 import { Formik, ErrorMessage, Field } from "formik";
 import { router } from "./Routes";
+import { Avatar } from "@mui/material";
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -63,12 +64,21 @@ const Profile = () => {
     return (
       <div className="max-w-[1100px] mx-auto mt-6 p-2 mb-32">
         <div className="w-fit mx-auto">
-          <img
-            className="w-32 h-32 rounded-full mx-auto mb-4"
-            src={placeholder}
-            alt="Rounded avatar"
-          ></img>
-          <div className="py-2 px-8 bg-accent w-fit rounded-full border-2 border-black mx-auto">
+          {user.image ? (
+            <Avatar
+              src={user.image}
+              className="cursor-pointer"
+              sx={{ width: 250, height: 250 }}
+            />
+          ) : (
+            <Avatar
+              sx={{ bgcolor: "#ff5722", width: 150, height: 150 }}
+              className="cursor-pointer"
+            >
+              <p className="text-6xl">{user.username[0].toUpperCase()}</p>
+            </Avatar>
+          )}
+          <div className="py-2 px-8 bg-accent w-fit rounded-full border-2 border-black mx-auto mt-4">
             <h3 className="text-lg font-bold">{user?.username}</h3>
           </div>
         </div>

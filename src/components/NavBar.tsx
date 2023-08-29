@@ -100,13 +100,22 @@ const NavBar = () => {
 
           {user ? (
             <div>
-              <Avatar
-                sx={{ bgcolor: "#ff5722", width: 45, height: 45 }}
-                className="cursor-pointer"
-                onClick={handleClick}
-              >
-                {user.username[0].toUpperCase()}
-              </Avatar>
+              {user.image ? (
+                <Avatar
+                  src={user.image}
+                  className="cursor-pointer"
+                  onClick={handleClick}
+                />
+              ) : (
+                <Avatar
+                  sx={{ bgcolor: "#ff5722", width: 45, height: 45 }}
+                  className="cursor-pointer"
+                  onClick={handleClick}
+                >
+                  {user.username[0].toUpperCase()}
+                </Avatar>
+              )}
+
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
