@@ -4,6 +4,7 @@ export interface FlashcardSet {
   id: string;
   title: string;
   description: string;
-  appUserId: string;
+  appUser?: string;
+  cardCount?: number;
   flashcards?: Flashcard[];
 }

@@ -6,6 +6,7 @@ import MobileNavBar from "./components/MobileNavBar";
 
 function App() {
   const location = useLocation();
+
   if (
     location.pathname === "/Create" ||
     location.pathname === "/Profile" ||
