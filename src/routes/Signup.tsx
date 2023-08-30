@@ -54,9 +54,9 @@ function Signup() {
     {/*login form*/}
     <div className='flex justify-center'>
       <div
-        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-accent w-[275px] h-[185px] rounded-2xl m-[160px]'
+        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] static bg-accent w-[275px] h-[185px] rounded-2xl m-[160px]'
       >
-        <p className='mt-[155px] ml-[10px]'>Already Registered?{' '}
+        <p className='mt-[155px] ml-[10px] w-[275px]'>Already Registered?{' '}
         <Link
           to='/Login'
           className='text-slate-200 underline underline-offset-2'
@@ -67,7 +67,7 @@ function Signup() {
       </div>
     </div>
     {/* signup card */}
-    <div className='z-10 pb-[10px] px-[20px] pt-[20px] text-center relative m-auto w-[275px] bg-cover drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl top-[61px] left-[30px]'
+    <div className='z-10 pb-[10px] px-[20px] pt-[20px] text-center relative m-auto w-[275px] bg-cover drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl -top-[451px] left-[30px]'
     style={{ backgroundImage: `url(${flashcardbg}) ` }}
     >
       {/*form stuff*/}
@@ -109,9 +109,8 @@ function Signup() {
             className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-primary border border-gray-300 text-sky-800 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-sky-800'
             placeholder='username'
             required
-          />{errors.username && touched.username ? (
-            <div>{errors.username}</div>
-          ) : null}
+          />
+          {errors.username && touched.username ? (<div className='popup'><div className='popuptext'>{errors.username}</div></div>) : null}
         </div>
         <div className='flex'>
           <span className='inline-flex items-center px-3 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -133,7 +132,8 @@ function Signup() {
             placeholder='email'
             pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
             required
-          />{errors.email && touched.email ? <div>{errors.email}</div> : null}
+          />
+          {errors.email && touched.email ? (<div className='popup'><div className='popuptext'>{errors.email}</div></div>) : null}
         </div>
         <div className='flex pt-[10px]'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -163,7 +163,7 @@ function Signup() {
             placeholder='password'
             required
           />
-          {errors.password && touched.password ? <div>{errors.password}</div> : null}
+          {errors.password && touched.password ? (<div className='popup'><div className='popuptext'>{errors.password}</div></div>) : null}
         </div>
          {/*password 2 v*/}
          <div className='flex'>
@@ -193,7 +193,7 @@ function Signup() {
             placeholder='confirm password'
             required
           />
-          {errors.confirmPassword && touched.confirmPassword ? <div>{errors.confirmPassword}</div> : null}
+          {errors.confirmPassword && touched.confirmPassword ? (<div className='popup'><div className='popuptext'>{errors.confirmPassword}</div></div>) : null}
         </div>
 
         <div className='text-center'>
@@ -204,6 +204,7 @@ function Signup() {
           >
             Register
           </button>
+          {/*<div className='bg-white absolute'>{errors.password}</div>*/}
         </div>
     </Form>)}
     </Formik>

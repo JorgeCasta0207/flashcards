@@ -56,9 +56,9 @@ const Login = () => {
         }}>
     {({ errors, touched }) => (
     <Form /*className='group'*/>
-      <div className='flex justify-center'>
+      <div className='flex justify-center mt-16'>
         <div
-          className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] absolute bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'
+          className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] relative bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'
           style={{ backgroundImage: `url(${flashcardbg}) ` }}
         >
           <div className='flex flex-wrap'>
@@ -80,8 +80,10 @@ const Login = () => {
               className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='email'
               required
-            />{errors.email && touched.email ? <div className='popup'><p className='popuptext'>{errors.email}</p></div> : null}
+            />
+            {errors.email && touched.email ? <div className='max-[645px]:hidden popup'><p className='max-[645px]:hidden popuptext'>{errors.email}</p></div> : null}
           </div>
+          {errors.email && touched.email ? <p className='min-[645px]:hidden'>{errors.email}</p> : null}
           <div className='flex pt-[10px]'>
             <span className='inline-flex items-center px-[10px] text-[#584289] bg-[#584289] border border-r-0 border-gray-300 rounded-l-md'>
               <svg
@@ -109,8 +111,9 @@ const Login = () => {
               className='shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] rounded-none rounded-r-lg bg-accent border border-gray-300 text-[#584289] focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 placeholder:text-[#584289]'
               placeholder='password'
               required
-            /> {errors.password && touched.password ? <div className='popup'><p className='popuptext'>{errors.password}</p></div> : null}
+            /> {errors.password && touched.password ? <div className='max-[645px]:hidden popup'><p className='max-[645px]:hidden popuptext'>{errors.password}</p></div> : null}
           </div>
+          {errors.password && touched.password ? <p className='min-[645px]:hidden'>{errors.password}</p> : null}
           <p className='text-[11px]'>Forgot password?</p>
           <div className='text-center'>
             <button
@@ -124,12 +127,12 @@ const Login = () => {
         </div>
       </div>
       {/* blue card */}
-      <div className='text-center relative m-auto w-[275px] h-[185px] bg-primary drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl top-[61px] left-[30px]'>
-        <p className='absolute top-[155px] ml-[10px] '>
+      <div className='text-center relative m-auto w-[275px] h-[185px] bg-primary drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl -top-[250px] max-[645px]:-top-[18.5rem] left-[30px]'>
+        <p className='absolute top-[10px] ml-[10px] '>
           Not Registered?{' '}
           <Link
             to='/Signup'
-            className='text-slate-200 underline underline-offset-2'
+            className='text-white underline underline-offset-2'
           >
             Sign Up
           </Link>
