@@ -1,38 +1,63 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect } from "react";
 import agent from "../api/agent";
 import { FlashcardSet } from "../models/flashcardSet";
 import { v4 as uuid } from "uuid";
-import { Formik, Field, ErrorMessage, FieldArray } from "formik";
-import { useParams, Form } from "react-router-dom";
+import { Formik, Field, ErrorMessage, FieldArray, Form } from "formik";
+import { useParams } from "react-router-dom";
 import { Flashcard } from "../models/flashcard";
 import { router } from "./Routes";
 import * as Yup from "yup";
+import { User } from "../models/user";
 
 interface FormikProps {
   push: (value: Flashcard) => void;
   remove: (index: number) => void;
 }
 
-const GetSetExample = () => {
+const Study = () => {
+  const { id } = useParams();
   const [set, setSet] = useState<FlashcardSet>();
 
   useEffect(() => {
     const fetchData = async () => {
-      const setData = await agent.Set.detail(
-        "F7D24C8C-42E7-47C4-937A-3D4E9FED30E9"
-      );
+      if (id) {
+        const setData = await agent.Set.detail(id);
+        setSet(setData);
+      }
+    };
 
-      setSet(setData);
+    fetchData();
+  }, [id]);
+
+  return (
+    <>
+      {set &&
+        set.flashcards &&
+        set?.flashcards.map((flashcard) => (
+          <>
+            <p>{flashcard.term}</p>
+            <img src={flashcard.pictureUrl} />
+          </>
+        ))}
+    </>
+  );
+};
+
+const Create = () => {
+  const [user, setUser] = useState<User | null>(null);
+  const [selectedFlashcard, setSelectedFlashcard] = useState<number>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await agent.Account.current();
+      setUser(data);
     };
 
     fetchData();
   }, []);
 
-  console.log(set);
-};
-
-const CreateSetExample = () => {
   const setId = uuid();
 
   const initialValues = {
@@ -81,7 +106,7 @@ const CreateSetExample = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values }) => (
+        {({ values, setFieldValue }) => (
           <Form>
             <div>
               <label className="block" htmlFor="title">
@@ -142,20 +167,46 @@ const CreateSetExample = () => {
                         </div>
 
                         <div>
-                          <label
-                            className="block"
-                            htmlFor={`flashcards[${index}].pictureUrl`}
+                          <p
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setSelectedFlashcard(index);
+                            }}
                           >
-                            Picture URL
-                          </label>
-                          <Field
-                            type="text"
-                            name={`flashcards[${index}].pictureUrl`}
-                          />
-                          <ErrorMessage
-                            name={`flashcards[${index}].pictureUrl`}
-                            component="div"
-                          />
+                            Add Picture
+                          </p>
+                          {selectedFlashcard === index && (
+                            <>
+                              <label
+                                className="block"
+                                htmlFor={`flashcards[${index}].pictureUrl`}
+                              >
+                                Picture URL
+                              </label>
+                              <Field
+                                type="text"
+                                name={`flashcards[${index}].pictureUrl`}
+                              />
+                              <ErrorMessage
+                                name={`flashcards[${index}].pictureUrl`}
+                                component="div"
+                              />
+                              {user &&
+                                user.pictures.map((picture, pictureIndex) => (
+                                  <img
+                                    key={pictureIndex}
+                                    src={picture.url}
+                                    className="w-1/4 h-1/4"
+                                    onClick={() => {
+                                      setFieldValue(
+                                        `flashcards[${index}].pictureUrl`,
+                                        picture.url
+                                      );
+                                    }}
+                                  />
+                                ))}
+                            </>
+                          )}
                         </div>
 
                         <div>
@@ -193,15 +244,19 @@ const CreateSetExample = () => {
   );
 };
 
-const EditSetExample = () => {
+const Edit = () => {
   const [exisitingSet, setExisitingSet] = useState<FlashcardSet>();
   const { id } = useParams();
+  const [user, setUser] = useState<User | null>(null);
+  const [selectedFlashcard, setSelectedFlashcard] = useState<number>();
 
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
         const data = await agent.Set.detail(id);
+        const userData = await agent.Account.current();
         setExisitingSet(data);
+        setUser(userData);
       }
     };
 
@@ -265,7 +320,7 @@ const EditSetExample = () => {
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
-          {({ values }) => (
+          {({ values, setFieldValue }) => (
             <Form>
               <div>
                 <label className="block" htmlFor="title">
@@ -327,20 +382,46 @@ const EditSetExample = () => {
                           </div>
 
                           <div>
-                            <label
-                              className="block"
-                              htmlFor={`flashcards[${index}].pictureUrl`}
+                            <p
+                              className="cursor-pointer"
+                              onClick={() => {
+                                setSelectedFlashcard(index);
+                              }}
                             >
-                              Picture URL
-                            </label>
-                            <Field
-                              type="text"
-                              name={`flashcards[${index}].pictureUrl`}
-                            />
-                            <ErrorMessage
-                              name={`flashcards[${index}].pictureUrl`}
-                              component="div"
-                            />
+                              Add Picture
+                            </p>
+                            {selectedFlashcard === index && (
+                              <>
+                                <label
+                                  className="block"
+                                  htmlFor={`flashcards[${index}].pictureUrl`}
+                                >
+                                  Picture URL
+                                </label>
+                                <Field
+                                  type="text"
+                                  name={`flashcards[${index}].pictureUrl`}
+                                />
+                                <ErrorMessage
+                                  name={`flashcards[${index}].pictureUrl`}
+                                  component="div"
+                                />
+                                {user &&
+                                  user.pictures.map((picture, pictureIndex) => (
+                                    <img
+                                      key={pictureIndex}
+                                      src={picture.url}
+                                      className="w-1/4 h-1/4"
+                                      onClick={() => {
+                                        setFieldValue(
+                                          `flashcards[${index}].pictureUrl`,
+                                          picture.url
+                                        );
+                                      }}
+                                    />
+                                  ))}
+                              </>
+                            )}
                           </div>
 
                           <div>
