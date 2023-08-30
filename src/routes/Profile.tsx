@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import placeholder from "../assets/360_F_462636502_9cDAYuyVvBY4qYJlHjW7vqar5HYS8h8x.jpg";
 import { ChangeUserFormValues, User } from "../models/user";
 import agent from "../api/agent";
 import * as Yup from "yup";
 import { Formik, ErrorMessage, Field } from "formik";
 import { router } from "./Routes";
 import { Avatar } from "@mui/material";
+import Picture from "../models/picture";
+import PictureUploadWidget from "../components/pictureUpload/PictureUploadWidget";
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
   const [refetch, setRefetch] = useState(false);
+  const [addPictureMode, setAddPictureMode] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,12 +54,31 @@ const Profile = () => {
   };
 
   const handleDelete = async (user: User) => {
-    console.log("I run");
     await agent.Account.delete(user);
     localStorage.removeItem("token");
     setUser(null);
 
     router.navigate("/");
+  };
+
+  const handlePictureUpload = async (file: Blob) => {
+    await agent.Account.uploadPicture(file);
+    const data = await agent.Account.current();
+    setUser(data);
+
+    setAddPictureMode(false);
+  };
+
+  const handleSetProfilePicture = async (pictureId: string) => {
+    await agent.Account.setProfilePicture(pictureId);
+    const data = await agent.Account.current();
+    setUser(data);
+  };
+
+  const handleDeletePicture = async (pictureId: string) => {
+    await agent.Account.deletePicture(pictureId);
+    const data = await agent.Account.current();
+    setUser(data);
   };
 
   if (user) {
@@ -82,8 +103,57 @@ const Profile = () => {
             <h3 className="text-lg font-bold">{user?.username}</h3>
           </div>
         </div>
+
         <div className="bg-accent p-6 mt-4 rounded-xl w-3/4 lg:w-1/2 mx-auto">
-          <h2 className="text-md font-bold mb-4">Change Username</h2>
+          {addPictureMode ? (
+            <>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Add Picture</h2>
+                <button
+                  className="text-white bg-purple-900 w-28 rounded-md p-1"
+                  onClick={() => setAddPictureMode(!addPictureMode)}
+                >
+                  Cancel
+                </button>
+              </div>
+              <PictureUploadWidget uploadPicture={handlePictureUpload} />
+            </>
+          ) : (
+            <>
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-xl font-bold">Your Pictures</h2>
+                <button
+                  className="text-white bg-purple-900 w-28 rounded-full p-2"
+                  onClick={() => setAddPictureMode(!addPictureMode)}
+                >
+                  Add Picture
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                {user.pictures.map((picture: Picture) => (
+                  <div key={picture.id}>
+                    <img src={picture.url} />
+                    <button
+                      className="text-white bg-purple-900 w-28 rounded-full p-2"
+                      onClick={() => handleSetProfilePicture(picture.id)}
+                    >
+                      Set Profile Picture
+                    </button>
+                    <button
+                      className="text-white bg-purple-900 w-28 rounded-full p-2"
+                      onClick={() => handleDeletePicture(picture.id)}
+                    >
+                      Delete Picture
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="bg-accent p-6 mt-4 rounded-xl w-3/4 lg:w-1/2 mx-auto">
+          <h2 className="text-xl font-bold mb-4">Change Username</h2>
           <Formik
             initialValues={{ username: "", password: "", error: null }}
             validationSchema={usernameSchema}
@@ -122,8 +192,9 @@ const Profile = () => {
             )}
           </Formik>
         </div>
+
         <div className="flex flex-col gap-4 bg-accent p-6 mt-4 rounded-xl w-3/4 lg:w-1/2 mx-auto">
-          <h2 className="text-md font-bold">Change Password</h2>
+          <h2 className="text-xl font-bold">Change Password</h2>
           <Formik
             initialValues={{
               password: "",
@@ -174,6 +245,7 @@ const Profile = () => {
             )}
           </Formik>
         </div>
+
         <div className="mx-auto w-fit">
           <button
             className="text-red-500 bg-white w-45 rounded-full px-5 py-2 mt-5"

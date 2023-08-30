@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from "axios";
 import { PaginatedResult } from "../models/pagination";
 import { ChangeUserFormValues, User, UserFormValues } from "../models/user";
 import { FlashcardSet } from "../models/flashcardSet";
+import Picture from "../models/picture";
 
 axios.defaults.baseURL = "http://localhost:5000/api/";
 
@@ -67,6 +68,16 @@ const Account = {
   password: (user: ChangeUserFormValues) =>
     requests.put<void>("account/password", user),
   delete: (user: User) => requests.post<void>("account/delete", user),
+  uploadPicture: (file: Blob) => {
+    const formData = new FormData();
+    formData.append("File", file);
+    return axios.post<Picture>("pictures", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+  setProfilePicture: (id: string) =>
+    requests.post(`/pictures/${id}/setMain`, {}),
+  deletePicture: (id: string) => requests.delete(`/pictures/${id}`),
 };
 
 const Set = {

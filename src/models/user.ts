@@ -1,7 +1,10 @@
+import Picture from "./picture";
+
 export interface User {
   username: string;
   token: string;
   image: string;
+  pictures: Picture[];
 }
 
 export interface UserFormValues {
