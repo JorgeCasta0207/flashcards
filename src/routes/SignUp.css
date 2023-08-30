@@ -7,7 +7,7 @@
   /* The actual popup (appears on top) */
   .popup .popuptext {
     visibility: visible;
-    width: 160px;
+    width: 200px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -23,10 +23,10 @@
   
   /* Popup arrow */
   .popup .popuptext::after {
-    content: "";
+    /*content: "";*/
     position: absolute;
-    top: 100%;
-    left: 50%;
+    /*top: 100%;
+    left: 50%;*/
     margin-left: 10%;
     border-width: 5px;
     border-style: solid;
