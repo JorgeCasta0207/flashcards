@@ -36,7 +36,7 @@ function Signup() {
 
   return (
     <div
-    className='bg-cover'
+    className='bg-cover overflow-y-scroll'
     style={{ backgroundImage: `url(${loginbg})`, height: '100vh' }}>
     <div className='p-3 w-max'>
       <Link to='/'>
@@ -59,7 +59,7 @@ function Signup() {
         <p className='mt-[155px] ml-[10px] w-[275px]'>Already Registered?{' '}
         <Link
           to='/Login'
-          className='text-slate-200 underline underline-offset-2'
+          className='text-white underline underline-offset-2'
         >
           Login
         </Link>
@@ -68,7 +68,7 @@ function Signup() {
     </div>
     {/* signup card */}
     <div className='z-10 pb-[10px] px-[20px] pt-[20px] text-center relative m-auto w-[275px] bg-cover drop-shadow-[0px_4px_4px_rgba(0,0,0,0.65)] rounded-2xl -top-[451px] left-[30px]'
-    style={{ backgroundImage: `url(${flashcardbg}) ` }}
+    style={{ backgroundImage: `url(${flashcardbg})`}}
     >
       {/*form stuff*/}
       <Formik 
@@ -110,7 +110,7 @@ function Signup() {
             placeholder='username'
             required
           />
-          {errors.username && touched.username ? (<div className='popup'><div className='popuptext'>{errors.username}</div></div>) : null}
+          {errors.username && touched.username ? (<div className='popup'><div className='popuptextleft'>{errors.username}</div></div>) : null}
         </div>
         <div className='flex'>
           <span className='inline-flex items-center px-3 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -163,7 +163,7 @@ function Signup() {
             placeholder='password'
             required
           />
-          {errors.password && touched.password ? (<div className='popup'><div className='popuptext'>{errors.password}</div></div>) : null}
+          {errors.password && touched.password ? (<div className='popup'><div className='popuptextleft'>{errors.password}</div></div>) : null}
         </div>
          {/*password 2 v*/}
          <div className='flex'>
@@ -204,7 +204,7 @@ function Signup() {
           >
             Register
           </button>
-          {/*<div className='bg-white absolute'>{errors.password}</div>*/}
+
         </div>
     </Form>)}
     </Formik>

@@ -18,7 +18,8 @@ const validationSchema = Yup.object().shape({
   ).required('Email is required'),
   password: Yup.string().required('Password is required')
 });
-
+{/*wip below to change back card height conditionally by # of errors in mobile view*/}
+{/*Object.keys(errors).length == 1 ? <p>Hello</p> : <p>no</p>*/}
 const Login = () => {
   return (
     <div
@@ -55,7 +56,7 @@ const Login = () => {
         router.navigate('/Library');
         }}>
     {({ errors, touched }) => (
-    <Form /*className='group'*/>
+    <Form>
       <div className='flex justify-center mt-16'>
         <div
           className='z-10 drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] relative bg-cover bg-no-repeat bg-white px-[25px] pt-[25px] pb-[10px] rounded-2xl m-8 max-w-fit'

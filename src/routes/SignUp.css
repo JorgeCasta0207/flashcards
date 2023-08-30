@@ -20,6 +20,21 @@
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
   }
+
+  .popup .popuptextleft {
+    visibility: visible;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    margin-left: -444px;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
   
   /* Popup arrow */
   .popup .popuptext::after {
