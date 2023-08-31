@@ -4,7 +4,7 @@ import { ChangeUserFormValues, User, UserFormValues } from "../models/user";
 import { FlashcardSet } from "../models/flashcardSet";
 import Picture from "../models/picture";
 
-axios.defaults.baseURL = "http://localhost:5000/api/";
+axios.defaults.baseURL = "https://bvtflashcardsserver.fly.dev/api/";
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
