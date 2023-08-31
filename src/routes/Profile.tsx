@@ -105,6 +105,8 @@ const Profile = () => {
         </div>
 
         <div className="bg-accent p-6 mt-4 rounded-xl w-3/4 lg:w-1/2 mx-auto">
+        {user && user.pictures ? (
+        <div>
           {addPictureMode ? (
             <>
               <div className="flex justify-between items-center mb-4">
@@ -129,6 +131,7 @@ const Profile = () => {
                   Add Picture
                 </button>
               </div>
+              
               <div className="grid grid-cols-3 gap-4">
                 {user.pictures.map((picture: Picture) => (
                   <div key={picture.id}>
@@ -151,6 +154,10 @@ const Profile = () => {
             </>
           )}
         </div>
+        ) : (
+          <p>User has no pictures available</p>
+        )}
+      </div>
 
         <div className="bg-accent p-6 mt-4 rounded-xl w-3/4 lg:w-1/2 mx-auto">
           <h2 className="text-xl font-bold mb-4">Change Username</h2>
@@ -257,7 +264,7 @@ const Profile = () => {
       </div>
     );
   } else {
-    null;
+    return null;
   }
 };
 
