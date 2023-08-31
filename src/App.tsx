@@ -14,22 +14,24 @@ function App() {
     location.pathname === "/Edit"
   ) {
     return (
-      <>
+      <> {/*max-lg:bg-mobile*/}
         <div className="max-lg:bg-mobile bg-primary body-wrapper">
           <NavBar />
           <Outlet />
         </div>
-        <MobileNavBar />
+        <MobileNavBar />z
       </>
     );
   } else {
     return (
       <>
         {location.pathname === "/" ? (
-          <div className="bg-primary body-wrapper">
+          <><div className="bg-primary body-wrapper">
             <NavBar />
             <Home />
           </div>
+          
+          <MobileNavBar /></>
         ) : (
           <div className="bg-primary body-wrapper">
             <NavBar />
