@@ -21,7 +21,7 @@ const MobileNavBar = () => {
     top: '25%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 350,
+    width: '90%',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -65,23 +65,26 @@ const MobileNavBar = () => {
             open={openModal}
             onClose={handleCloseModal}
             aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
+            aria-describedby="modal-modal-description">
+
             <Box sx={style}>
               <Typography id="modal-modal-title" variant="h4" component="h2">
                 Search
               </Typography>
+            <div className="px-5 max-sm:px-0 max-md:px-20 max-lg:px-20">
             <div className="relative w-[100%] mt-2">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <SearchIcon />
+              <SearchIcon sx={{fontSize: '1.875rem'}} />
             </div>
+            
             <input
-              className="w-full p-2 pl-10 text-white placeholder:text-white bg-accent rounded-lg"
+              className="w-full text-3xl p-2 pl-12 text-white placeholder:text-white bg-accent rounded-lg"
               placeholder="Search all sets..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyUp={handleSearch}
             />
+            </div>
           </div>
           </Box>
           </Modal>

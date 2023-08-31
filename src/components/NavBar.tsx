@@ -90,7 +90,7 @@ const NavBar = () => {
               <SearchIcon />
             </div>
             <input
-              className="w-full p-2 pl-10 text-sm text-white placeholder:text-white bg-accent rounded-lg"
+              className="w-full p-2 pl-10 text-xl text-white placeholder:text-white bg-accent rounded-lg"
               placeholder="Search all sets..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}

@@ -23,7 +23,7 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
   return (
     <div
-      className='bg-cover'
+      className='bg-cover overflow-y-scroll'
       style={{ backgroundImage: `url(${loginbg})`, height: '100vh' }}
     >
       <div className='p-3 w-max'>

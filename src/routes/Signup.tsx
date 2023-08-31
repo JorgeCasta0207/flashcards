@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
     ),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    .oneOf([Yup.ref('password')], 'Passwords must match')
     .required('Confirm password is required'),
 });
 
@@ -54,9 +54,9 @@ function Signup() {
     {/*login form*/}
     <div className='flex justify-center'>
       <div
-        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] static bg-accent w-[275px] h-[185px] rounded-2xl m-[160px]'
+        className='drop-shadow-[0px_4px_4px_rgba(0,0,0,0.45)] relative bg-accent -top-[140px] w-[275px] h-[185px] rounded-2xl m-[160px]'
       >
-        <p className='mt-[155px] ml-[10px] w-[275px]'>Already Registered?{' '}
+        <p className='mt-[5px] ml-[10px] w-[275px]'>Already Registered?{' '}
         <Link
           to='/Login'
           className='text-white underline underline-offset-2'
@@ -90,7 +90,7 @@ function Signup() {
         router.navigate('/Library');
       }}>
     {({ errors, touched }) => (
-    <Form /*form className='group'*/>
+    <Form>
       <div className='flex'>
           <span className='inline-flex items-center px-3 text-blue-600 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
             <svg
@@ -110,8 +110,9 @@ function Signup() {
             placeholder='username'
             required
           />
-          {errors.username && touched.username ? (<div className='popup'><div className='popuptextleft'>{errors.username}</div></div>) : null}
+          {errors.username && touched.username ? (<div className='max-[710px]:hidden popup'><div className='max-[710px]:hidden popuptextleft'>{errors.username}</div></div>) : null}
         </div>
+        {errors.username && touched.username ? <p className='min-[710px]:hidden'>{errors.username}</p> : null}
         <div className='flex'>
           <span className='inline-flex items-center px-3 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
             <svg
@@ -133,8 +134,9 @@ function Signup() {
             pattern="^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$"
             required
           />
-          {errors.email && touched.email ? (<div className='popup'><div className='popuptext'>{errors.email}</div></div>) : null}
+          {errors.email && touched.email ? (<div className='max-[710px]:hidden popup'><div className='max-[710px]:hidden popuptext'>{errors.email}</div></div>) : null}
         </div>
+        {errors.email && touched.email ? <p className='min-[710px]:hidden'>{errors.email}</p> : null}
         <div className='flex pt-[10px]'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
             <svg
@@ -163,8 +165,9 @@ function Signup() {
             placeholder='password'
             required
           />
-          {errors.password && touched.password ? (<div className='popup'><div className='popuptextleft'>{errors.password}</div></div>) : null}
+          {errors.password && touched.password ? (<div className='max-[710px]:hidden popup'><div className='max-[710px]:hidden popuptextleft'>{errors.password}</div></div>) : null}
         </div>
+        {errors.password && touched.password ? <p className='min-[710px]:hidden'>{errors.password}</p> : null}
          {/*password 2 v*/}
          <div className='flex'>
           <span className='inline-flex items-center px-[10px] text-sky-800 bg-blue-700 border border-r-0 border-gray-300 rounded-l-md'>
@@ -193,8 +196,9 @@ function Signup() {
             placeholder='confirm password'
             required
           />
-          {errors.confirmPassword && touched.confirmPassword ? (<div className='popup'><div className='popuptext'>{errors.confirmPassword}</div></div>) : null}
+          {errors.confirmPassword && touched.confirmPassword ? (<div className='max-[710px]:hidden popup'><div className='max-[710px]:hidden popuptext'>{errors.confirmPassword}</div></div>) : null}
         </div>
+        {errors.confirmPassword && touched.confirmPassword ? <p className='min-[710px]:hidden'>{errors.confirmPassword}</p> : null}
 
         <div className='text-center'>
           <button
