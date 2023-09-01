@@ -39,7 +39,7 @@ const Home = () => {
           <div className="mb-16 lg:mb-0 lg:max-w-lg lg:pr-5">
             <div className="max-w-xl mb-6">
               <h2 className="font-sans text-3xl sm:mt-0 mt-6 font-bold tracking-tight text-black sm:text-4xl sm:leading-none max-w-lg mb-6">
-                Quizlet - A powerful tool
+                Quiz Lit - A powerful tool 🔥
               </h2>
               <p className="text-black text-2xl md:text-3xl">
                 Quiz Lit is a powerful online tool that allows students to
