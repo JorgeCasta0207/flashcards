@@ -46,3 +46,45 @@
   padding-right: 15px;
   }
   
+  .editCard {
+  background-color: #9C73F6;
+  border-radius: 7px;
+  width: 95%;
+  text-align: center;
+  box-shadow: 2px 7px 43px -10px rgba(0, 0, 0, 0.75);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.topEditBar {
+  display: flex;
+  justify-content: flex-end; /* Aligns items to the right */
+  align-items: center;
+  background-color: #584289B2;
+  padding: 10px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+.topBarButton {
+  margin-right: 10px;
+}
+
+.dragHandle {
+  cursor: grab;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+.create-page {
+  height: 100vh; /* 100% of viewport height */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
