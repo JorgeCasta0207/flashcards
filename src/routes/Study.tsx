@@ -21,16 +21,16 @@ const Study = () => {
   return (
     <div>
       <div className="studycard">
-        <h1>How would you center a div in CSS?</h1>
+        <h1></h1>
       </div>
 
       <> {/*flashcard rendering below*/}
       {set &&
         set.flashcards &&
         set?.flashcards.map((flashcard) => (
-          <div key={flashcard.id}>
-            <p>{flashcard.term}</p>
-            <p>{flashcard.definition}</p>
+          <div  key={flashcard.id}>
+            <p className="side-cards">{flashcard.term}</p>
+            <p >{flashcard.definition}</p>
             <img src={flashcard.pictureUrl} />
           </div>
         ))}

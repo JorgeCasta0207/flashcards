@@ -14,10 +14,12 @@
 }
 
 .side-cards {
+  text-align: center;
+  font-size: small;
   background-color: white;
   width: 15%;
   border-radius: 5px;
-  padding: 5%;
+  padding: 4%;
   text-align: center;
   box-shadow: 13px 12px 25px -4px rgba(0, 0, 0, 0.54);
   float: right;
@@ -31,4 +33,16 @@
 .body-wrapper {
   height: 100vh;
   overflow-y: scroll;
-}
+  }
+  .card {
+  padding-bottom: 20px;
+  }
+  .card-container {
+  padding-bottom: 2%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-left: 2%;
+  padding-right: 15px;
+  }
+  
