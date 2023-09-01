@@ -61,21 +61,23 @@ const NavBar = () => {
 
     setAnchorEl(null);
   };
+  if (location.pathname === "/Login" || location.pathname === "/Signup") {
+    return null;
+  } else {
+    return (
+      <nav className="bg-primary px-5">
+        <div>
+          <div className="mx-auto flex justify-between items-center p-1">
+            {/*Logo vvv*/}
+            <img
+              className="h-20 w-auto cursor-pointer"
+              src={logo}
+              alt="Quiz Lit"
+              onClick={() => router.navigate("/")}
+            />
+            {/*Search bar vvv*/}
 
-  return (
-    <nav className="bg-primary px-5">
-      <div>
-        <div className="mx-auto flex justify-between items-center p-1">
-          {/*Logo vvv*/}
-          <img
-            className="h-20 w-auto cursor-pointer"
-            src={logo}
-            alt="Quiz Lit"
-            onClick={() => router.navigate("/")}
-          />
-          {/*Search bar vvv*/}
-
-          {/* <Link to="/">Home |</Link>
+            {/* <Link to="/">Home |</Link>
               <Link to="/Login"> Login |</Link>
               <Link to="/Signup"> Signup |</Link>
               <Link to="/Profile"> Profile |</Link>
@@ -85,73 +87,74 @@ const NavBar = () => {
               <Link to="/Create"> Create |</Link>
               <Link to="/Edit"> Edit |</Link> */}
 
-          <div className="relative w-1/3">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <SearchIcon />
+            <div className="relative w-1/3">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <SearchIcon />
+              </div>
+              <input
+                className="w-full p-2 pl-10 text-xl text-white placeholder:text-white bg-accent rounded-lg"
+                placeholder="Search all sets..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyUp={handleSearch}
+              />
             </div>
-            <input
-              className="w-full p-2 pl-10 text-xl text-white placeholder:text-white bg-accent rounded-lg"
-              placeholder="Search all sets..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyUp={handleSearch}
-            />
-          </div>
 
-          {user ? (
-            <div>
-              {user.image ? (
-                <Avatar
-                  src={user.image}
-                  className="cursor-pointer"
-                  onClick={handleClick}
-                />
-              ) : (
-                <Avatar
-                  sx={{ bgcolor: "#ff5722", width: 45, height: 45 }}
-                  className="cursor-pointer"
-                  onClick={handleClick}
+            {user ? (
+              <div>
+                {user.image ? (
+                  <Avatar
+                    src={user.image}
+                    className="cursor-pointer"
+                    onClick={handleClick}
+                  />
+                ) : (
+                  <Avatar
+                    sx={{ bgcolor: "#ff5722", width: 45, height: 45 }}
+                    className="cursor-pointer"
+                    onClick={handleClick}
+                  >
+                    {user.username[0].toUpperCase()}
+                  </Avatar>
+                )}
+
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={() => handleClose("")}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
                 >
-                  {user.username[0].toUpperCase()}
-                </Avatar>
-              )}
-
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={() => handleClose("")}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
+                  <MenuItem onClick={() => handleClose("sets")}>
+                    Your Sets
+                  </MenuItem>
+                  <MenuItem onClick={() => handleClose("create")}>
+                    Create Set
+                  </MenuItem>
+                  <MenuItem onClick={() => handleClose("profile")}>
+                    Your Profile
+                  </MenuItem>
+                  <MenuItem onClick={() => handleClose("logout")}>
+                    Log out
+                  </MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="bg-secondary py-2 px-4 rounded-full text-lg"
+                onClick={() => router.navigate("/Login")}
               >
-                <MenuItem onClick={() => handleClose("sets")}>
-                  Your Sets
-                </MenuItem>
-                <MenuItem onClick={() => handleClose("create")}>
-                  Create Set
-                </MenuItem>
-                <MenuItem onClick={() => handleClose("profile")}>
-                  Your Profile
-                </MenuItem>
-                <MenuItem onClick={() => handleClose("logout")}>
-                  Log out
-                </MenuItem>
-              </Menu>
-            </div>
-          ) : (
-            <button
-              type="button"
-              className="bg-secondary py-2 px-4 rounded-full text-lg"
-              onClick={() => router.navigate("/Login")}
-            >
-              Login / Signup
-            </button>
-          )}
+                Login / Signup
+              </button>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
-  );
+      </nav>
+    );
+  }
 };
 
 export default NavBar;

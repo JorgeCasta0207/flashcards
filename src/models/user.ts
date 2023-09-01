@@ -11,6 +11,7 @@ export interface UserFormValues {
   email: string;
   password: string;
   username?: string;
+  confirmPassword?: string;
 }
 
 export interface ChangeUserFormValues {

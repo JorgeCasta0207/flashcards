@@ -17,13 +17,13 @@ const MobileNavBar = () => {
   const handleCloseModal = () => setOpen(false);
 
   const style = {
-    position: 'absolute' as 'absolute',
-    top: '25%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    position: "absolute" as "absolute",
+    top: "25%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "90%",
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -33,7 +33,7 @@ const MobileNavBar = () => {
       router.navigate(`/Results/${search}`);
     }
   };
-  
+
   {
     return (
       <div className="sticky w-full z-50 bottom-0 py-3 absolute bg-primary hidden max-lg:block drop-shadow-[0px_2px_5px_rgba(0,0,0,0.75)]">
@@ -62,32 +62,32 @@ const MobileNavBar = () => {
             </Button>
             {/*modal stuff*/}
             <Modal
-            open={openModal}
-            onClose={handleCloseModal}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
+              open={openModal}
+              onClose={handleCloseModal}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h4" component="h2">
+                  Search
+                </Typography>
+                <div className="px-5 max-sm:px-0 max-md:px-20 max-lg:px-20">
+                  <div className="relative w-[100%] mt-2">
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <SearchIcon sx={{ fontSize: "1.875rem" }} />
+                    </div>
 
-            <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h4" component="h2">
-                Search
-              </Typography>
-            <div className="px-5 max-sm:px-0 max-md:px-20 max-lg:px-20">
-            <div className="relative w-[100%] mt-2">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <SearchIcon sx={{fontSize: '1.875rem'}} />
-            </div>
-            
-            <input
-              className="w-full text-3xl p-2 pl-12 text-white placeholder:text-white bg-accent rounded-lg"
-              placeholder="Search all sets..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyUp={handleSearch}
-            />
-            </div>
-          </div>
-          </Box>
-          </Modal>
+                    <input
+                      className="w-full text-3xl p-2 pl-12 text-white placeholder:text-white bg-accent rounded-lg"
+                      placeholder="Search all sets..."
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      onKeyUp={handleSearch}
+                    />
+                  </div>
+                </div>
+              </Box>
+            </Modal>
           </div>
 
           <div className="block ">
