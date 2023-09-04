@@ -4,7 +4,7 @@ import flashcards from "../assets/flashcards.jpg";
 const Home = () => {
   return (
     <>
-      <div className="relative h-[17rem] xl:h-3/6">
+      <div className="relative h-[17rem] xl:h-[21rem]">
         <img src={bg} alt="" className="w-full h-full z-0" />
         <div className="absolute bg-opacity-[.57] w-4/6 font-bold px-3 bg-accent rounded-r-3xl top-20">
           <div className="lg:hidden">
